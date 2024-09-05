@@ -24,5 +24,6 @@ py_test(
         "@pip_requests//:pkg",
         "@pip_wheel//:pkg",
         "@rules_python//python/runfiles",
+        "@pip//torch:torch",
     ],
 )

@@ -5,3 +5,4 @@
 certifi>=2023.7.22  # https://security.snyk.io/vuln/SNYK-PYTHON-CERTIFI-5805047
 wheel
 requests[security]>=2.8.1
+torch==2.1.1
