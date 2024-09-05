@@ -20,6 +20,29 @@ load("@rules_python//python:pip.bzl", "package_annotation", "pip_parse")
 # package. For details on `package_annotation` and it's uses, see the
 # docs at @rules_python//docs:pip.md`.
 ANNOTATIONS = {
+    "torch": package_annotation(
+        additive_build_content = """\
+cc_library(
+    name = "libtorch",
+    visibility = ["//visibility:public"],
+    hdrs = glob(["site-packages/torch/include/**/*.h"]),
+    srcs = glob([
+        "site-packages/torch/lib/*.so",
+        "site-packages/torch/lib/*.so.*"
+    ]),
+    includes = [
+        "site-packages/torch/include",
+        "site-packages/torch/include/torch/csrc/api/include",
+        "site-packages/torch/include/TH",
+        "site-packages/torch/include/THC",
+    ],
+    deps = [
+        "@python39//:libpython",
+        "@python39//:python_headers",
+    ],
+)
+""",
+    ),
     # This annotation verifies that annotations work correctly for pip packages with extras
     # specified, in this case requests[security].
     "requests": package_annotation(
